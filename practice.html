@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice · Lumina Stroke Gallery</title>
+    <style id="theme-vars">
+/* Lumina Stroke Gallery — Brand tokens for PC web UI */
+
+:root {
+  /* Core palette */
+  --lumina-bg: #FAF5FF;
+  --lumina-surface: #FFFFFF;
+  --lumina-surface-2: #F3E8FF;
+  --lumina-ink: #4A1D6A;
+  --lumina-ink-2: #7C3AED;
+  --lumina-ink-3: #A78BFA;
+  --lumina-line: #E9D5FF;
+  --lumina-brand: #A855F7;
+  --lumina-brand-ink: #FFFFFF;
+
+  /* Primary scale (single hue) */
+  --lumina-primary-50: #FAF5FF;
+  --lumina-primary-100: #F3E8FF;
+  --lumina-primary-200: #E9D5FF;
+  --lumina-primary-300: #D8B4FE;
+  --lumina-primary-400: #C084FC;
+  --lumina-primary-500: #A855F7;
+  --lumina-primary-600: #9333EA;
+  --lumina-primary-700: #7C3AED;
+  --lumina-primary-800: #6B21A8;
+  --lumina-primary-900: #4A1D6A;
+
+  /* Semantic aliases required by head contract */
+  --lumina-background: var(--lumina-bg);
+  --lumina-foreground: var(--lumina-ink);
+  --lumina-card: var(--lumina-surface);
+  --lumina-card-foreground: var(--lumina-ink);
+  --lumina-popover: var(--lumina-surface);
+  --lumina-popover-foreground: var(--lumina-ink);
+  --lumina-primary: var(--lumina-brand);
+  --lumina-primary-foreground: var(--lumina-brand-ink);
+  --lumina-muted: var(--lumina-surface-2);
+  --lumina-muted-foreground: var(--lumina-ink-2);
+  --lumina-border: var(--lumina-line);
+  --lumina-input: var(--lumina-line);
+  --lumina-ring: var(--lumina-primary-400);
+  --lumina-radius-small: 4px;
+  --lumina-radius-medium: 8px;
+  --lumina-radius-large: 16px;
+
+  /* Spacing */
+  --lumina-s-1: 4px;
+  --lumina-s-2: 8px;
+  --lumina-s-3: 12px;
+  --lumina-s-4: 16px;
+  --lumina-s-5: 24px;
+  --lumina-s-6: 32px;
+  --lumina-s-7: 48px;
+  --lumina-s-8: 80px;
+  --lumina-s-9: 120px;
+
+  /* Radius */
+  --lumina-r-xs: 2px;
+  --lumina-r-sm: 4px;
+  --lumina-r-md: 8px;
+  --lumina-r-lg: 16px;
+  --lumina-r-pill: 999px;
+
+  /* Shadows */
+  --lumina-shadow-1: 0 1px 2px rgba(74, 29, 106, 0.05), 0 1px 1px rgba(74, 29, 106, 0.03);
+  --lumina-shadow-2: 0 8px 24px -8px rgba(74, 29, 106, 0.18);
+  --lumina-shadow-3: 0 24px 60px -20px rgba(74, 29, 106, 0.30);
+
+  /* Typography */
+  --lumina-font-sans: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --lumina-font-display: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --lumina-font-mono: 'SF Mono', 'Fira Code', 'Noto Sans SC', monospace;
+}
+
+@layer base {
+  html, body {
+    font-family: var(--lumina-font-sans);
+    background-color: var(--lumina-bg);
+    color: var(--lumina-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* 禁止鼠标选中文本 */
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--lumina-font-display);
+    color: var(--lumina-ink);
+    font-weight: 600;
+    text-wrap: balance;
+    word-break: keep-all;
+  }
+
+  button, a {
+    transition: transform 160ms cubic-bezier(.2,.8,.2,1), color 160ms cubic-bezier(.2,.8,.2,1), background-color 160ms cubic-bezier(.2,.8,.2,1), box-shadow 160ms cubic-bezier(.2,.8,.2,1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--lumina-background);
+    --color-foreground: var(--lumina-foreground);
+    --color-card: var(--lumina-card);
+    --color-card-foreground: var(--lumina-card-foreground);
+    --color-popover: var(--lumina-popover);
+    --color-popover-foreground: var(--lumina-popover-foreground);
+    --color-primary: var(--lumina-primary);
+    --color-primary-foreground: var(--lumina-primary-foreground);
+    --color-muted: var(--lumina-muted);
+    --color-muted-foreground: var(--lumina-muted-foreground);
+    --color-border: var(--lumina-border);
+    --color-input: var(--lumina-input);
+    --color-ring: var(--lumina-ring);
+    --radius-sm: var(--lumina-radius-small);
+    --radius-md: var(--lumina-radius-medium);
+    --radius-lg: var(--lumina-radius-large);
+  }
+  @layer base {
+    body { background: var(--lumina-background); color: var(--lumina-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--lumina-background); }
+      .text-background { color: var(--lumina-background); }
+      .border-background { border-color: var(--lumina-background); }
+      .ring-background { --tw-ring-color: var(--lumina-background); }
+      .bg-foreground { background-color: var(--lumina-foreground); }
+      .text-foreground { color: var(--lumina-foreground); }
+      .border-foreground { border-color: var(--lumina-foreground); }
+      .ring-foreground { --tw-ring-color: var(--lumina-foreground); }
+      .bg-card { background-color: var(--lumina-card); }
+      .text-card { color: var(--lumina-card); }
+      .border-card { border-color: var(--lumina-card); }
+      .ring-card { --tw-ring-color: var(--lumina-card); }
+      .bg-card-foreground { background-color: var(--lumina-card-foreground); }
+      .text-card-foreground { color: var(--lumina-card-foreground); }
+      .border-card-foreground { border-color: var(--lumina-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--lumina-card-foreground); }
+      .bg-popover { background-color: var(--lumina-popover); }
+      .text-popover { color: var(--lumina-popover); }
+      .border-popover { border-color: var(--lumina-popover); }
+      .ring-popover { --tw-ring-color: var(--lumina-popover); }
+      .bg-popover-foreground { background-color: var(--lumina-popover-foreground); }
+      .text-popover-foreground { color: var(--lumina-popover-foreground); }
+      .border-popover-foreground { border-color: var(--lumina-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--lumina-popover-foreground); }
+      .bg-primary { background-color: var(--lumina-primary); }
+      .text-primary { color: var(--lumina-primary); }
+      .border-primary { border-color: var(--lumina-primary); }
+      .ring-primary { --tw-ring-color: var(--lumina-primary); }
+      .bg-primary-foreground { background-color: var(--lumina-primary-foreground); }
+      .text-primary-foreground { color: var(--lumina-primary-foreground); }
+      .border-primary-foreground { border-color: var(--lumina-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--lumina-primary-foreground); }
+      .bg-muted { background-color: var(--lumina-muted); }
+      .text-muted { color: var(--lumina-muted); }
+      .border-muted { border-color: var(--lumina-muted); }
+      .ring-muted { --tw-ring-color: var(--lumina-muted); }
+      .bg-muted-foreground { background-color: var(--lumina-muted-foreground); }
+      .text-muted-foreground { color: var(--lumina-muted-foreground); }
+      .border-muted-foreground { border-color: var(--lumina-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--lumina-muted-foreground); }
+      .bg-border { background-color: var(--lumina-border); }
+      .text-border { color: var(--lumina-border); }
+      .border-border { border-color: var(--lumina-border); }
+      .ring-border { --tw-ring-color: var(--lumina-border); }
+      .bg-input { background-color: var(--lumina-input); }
+      .text-input { color: var(--lumina-input); }
+      .border-input { border-color: var(--lumina-input); }
+      .ring-input { --tw-ring-color: var(--lumina-input); }
+      .bg-ring { background-color: var(--lumina-ring); }
+      .text-ring { color: var(--lumina-ring); }
+      .border-ring { border-color: var(--lumina-ring); }
+      .ring-ring { --tw-ring-color: var(--lumina-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col" style="background: url('assets/marble-fluid-texture.jpg') center/100% 100% no-repeat fixed;">
+  <main class="relative flex-1 flex flex-col">
+
+    <div class="max-w-7xl mx-auto px-6 py-10 flex-1 flex flex-col w-full">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+        <div>
+          <h1 class="text-3xl md:text-4xl font-semibold mb-2" style="color: var(--lumina-ink);">Zodiac Practice</h1>
+          <p class="text-base" style="color: var(--lumina-ink-2);">Trace the 12 pets</p>
+        </div>
+      </div>
+
+      <section class="max-h-[calc(100vh-240px)] overflow-y-auto no-scrollbar">
+        <div class="flex gap-4 items-start">
+
+          <!-- 左侧两列: 6 张宠物临摹图 -->
+          <div class="grid grid-cols-2 gap-4 flex-1 content-start">
+            <a class="group block rounded-2xl overflow-hidden transition hover:-translate-y-1 cursor-pointer" style="background: rgba(255,255,255,0.82); backdrop-filter: blur(6px); border: 1px solid var(--lumina-line); box-shadow: var(--lumina-shadow-1);"
+               href="practice-draw.html?img=assets%2FpracticeImage%2Fdc7cf013e6acfba48001264ee36aafee.jpg">
+              <img src="assets/practiceImage/dc7cf013e6acfba48001264ee36aafee.jpg" alt="Practice reference" draggable="false" class="w-full aspect-[4/3] object-contain block p-2">
+            </a>
+            <a class="group block rounded-2xl overflow-hidden transition hover:-translate-y-1 cursor-pointer" style="background: rgba(255,255,255,0.82); backdrop-filter: blur(6px); border: 1px solid var(--lumina-line); box-shadow: var(--lumina-shadow-1);"
+               href="practice-draw.html?img=assets%2FpracticeImage%2F3bbc91fa3dfca9f9da8c46c13bf0827e.jpg">
+              <img src="assets/practiceImage/3bbc91fa3dfca9f9da8c46c13bf0827e.jpg" alt="Practice reference" draggable="false" class="w-full aspect-[4/3] object-contain block p-2">
+            </a>
+            <a class="group block rounded-2xl overflow-hidden transition hover:-translate-y-1 cursor-pointer" style="background: rgba(255,255,255,0.82); backdrop-filter: blur(6px); border: 1px solid var(--lumina-line); box-shadow: var(--lumina-shadow-1);"
+               href="practice-draw.html?img=assets%2FpracticeImage%2Fe2e900da297f30314ff3e75af53cf809.jpg">
+              <img src="assets/practiceImage/e2e900da297f30314ff3e75af53cf809.jpg" alt="Practice reference" draggable="false" class="w-full aspect-[4/3] object-contain block p-2">
+            </a>
+            <a class="group block rounded-2xl overflow-hidden transition hover:-translate-y-1 cursor-pointer" style="background: rgba(255,255,255,0.82); backdrop-filter: blur(6px); border: 1px solid var(--lumina-line); box-shadow: var(--lumina-shadow-1);"
+               href="practice-draw.html?img=assets%2FpracticeImage%2F1dab40f68dbb9681ae646b103fd9570c.jpg">
+              <img src="assets/practiceImage/1dab40f68dbb9681ae646b103fd9570c.jpg" alt="Practice reference" draggable="false" class="w-full aspect-[4/3] object-contain block p-2">
+            </a>
+            <a class="group block rounded-2xl overflow-hidden transition hover:-translate-y-1 cursor-pointer" style="background: rgba(255,255,255,0.82); backdrop-filter: blur(6px); border: 1px solid var(--lumina-line); box-shadow: var(--lumina-shadow-1);"
+               href="practice-draw.html?img=assets%2FpracticeImage%2F42423dacb102fe88f6b853fd8acba496.jpg">
+              <img src="assets/practiceImage/42423dacb102fe88f6b853fd8acba496.jpg" alt="Practice reference" draggable="false" class="w-full aspect-[4/3] object-contain block p-2">
+            </a>
+            <a class="group block rounded-2xl overflow-hidden transition hover:-translate-y-1 cursor-pointer" style="background: rgba(255,255,255,0.82); backdrop-filter: blur(6px); border: 1px solid var(--lumina-line); box-shadow: var(--lumina-shadow-1);"
+               href="practice-draw.html?img=assets%2FpracticeImage%2F322d487deb3d1815b6975b02ebe74f22.jpg">
+              <img src="assets/practiceImage/322d487deb3d1815b6975b02ebe74f22.jpg" alt="Practice reference" draggable="false" class="w-full aspect-[4/3] object-contain block p-2">
+            </a>
+          </div>
+
+          <!-- 右侧两列: 6 个马卡龙色纯色图案(PNG, 同样可点击进入临摹) -->
+          <div class="grid grid-cols-2 gap-4 flex-1 content-start">
+            <a class="group block rounded-2xl overflow-hidden transition hover:-translate-y-1 cursor-pointer" style="background: rgba(255,255,255,0.82); backdrop-filter: blur(6px); border: 1px solid var(--lumina-line); box-shadow: var(--lumina-shadow-1);"
+               href="practice-draw.html?img=assets%2FpracticeImage%2Fshape-sunglasses.png">
+              <img src="assets/practiceImage/shape-sunglasses.png" alt="Sunglasses" draggable="false" class="w-full aspect-[4/3] object-contain block p-2">
+            </a>
+            <a class="group block rounded-2xl overflow-hidden transition hover:-translate-y-1 cursor-pointer" style="background: rgba(255,255,255,0.82); backdrop-filter: blur(6px); border: 1px solid var(--lumina-line); box-shadow: var(--lumina-shadow-1);"
+               href="practice-draw.html?img=assets%2FpracticeImage%2Fshape-palm.png">
+              <img src="assets/practiceImage/shape-palm.png" alt="Palm tree" draggable="false" class="w-full aspect-[4/3] object-contain block p-2">
+            </a>
+            <a class="group block rounded-2xl overflow-hidden transition hover:-translate-y-1 cursor-pointer" style="background: rgba(255,255,255,0.82); backdrop-filter: blur(6px); border: 1px solid var(--lumina-line); box-shadow: var(--lumina-shadow-1);"
+               href="practice-draw.html?img=assets%2FpracticeImage%2Fshape-cowboy-hat.png">
+              <img src="assets/practiceImage/shape-cowboy-hat.png" alt="Cowboy hat" draggable="false" class="w-full aspect-[4/3] object-contain block p-2">
+            </a>
+            <a class="group block rounded-2xl overflow-hidden transition hover:-translate-y-1 cursor-pointer" style="background: rgba(255,255,255,0.82); backdrop-filter: blur(6px); border: 1px solid var(--lumina-line); box-shadow: var(--lumina-shadow-1);"
+               href="practice-draw.html?img=assets%2FpracticeImage%2Fshape-star.png">
+              <img src="assets/practiceImage/shape-star.png" alt="Star" draggable="false" class="w-full aspect-[4/3] object-contain block p-2">
+            </a>
+            <a class="group block rounded-2xl overflow-hidden transition hover:-translate-y-1 cursor-pointer" style="background: rgba(255,255,255,0.82); backdrop-filter: blur(6px); border: 1px solid var(--lumina-line); box-shadow: var(--lumina-shadow-1);"
+               href="practice-draw.html?img=assets%2FpracticeImage%2Fshape-cloud.png">
+              <img src="assets/practiceImage/shape-cloud.png" alt="Cloud" draggable="false" class="w-full aspect-[4/3] object-contain block p-2">
+            </a>
+            <a class="group block rounded-2xl overflow-hidden transition hover:-translate-y-1 cursor-pointer" style="background: rgba(255,255,255,0.82); backdrop-filter: blur(6px); border: 1px solid var(--lumina-line); box-shadow: var(--lumina-shadow-1);"
+               href="practice-draw.html?img=assets%2FpracticeImage%2Fshape-heart.png">
+              <img src="assets/practiceImage/shape-heart.png" alt="Heart" draggable="false" class="w-full aspect-[4/3] object-contain block p-2">
+            </a>
+          </div>
+
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer style="background: rgba(255,255,255,0.85); backdrop-filter: blur(6px); border-top: 1px solid var(--lumina-line);">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-center text-sm" style="color: var(--lumina-ink-2);">
+      <p>Lumina Stroke Gallery</p>
+    </div>
+  </footer>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

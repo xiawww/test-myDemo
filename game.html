@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Draw · Lumina Stroke Gallery</title>
+    <style id="theme-vars">
+/* Lumina Stroke Gallery — Brand tokens for PC web UI */
+
+:root {
+  /* Core palette */
+  --lumina-bg: #FAF5FF;
+  --lumina-surface: #FFFFFF;
+  --lumina-surface-2: #F3E8FF;
+  --lumina-ink: #4A1D6A;
+  --lumina-ink-2: #7C3AED;
+  --lumina-ink-3: #A78BFA;
+  --lumina-line: #E9D5FF;
+  --lumina-brand: #A855F7;
+  --lumina-brand-ink: #FFFFFF;
+
+  /* Primary scale (single hue) */
+  --lumina-primary-50: #FAF5FF;
+  --lumina-primary-100: #F3E8FF;
+  --lumina-primary-200: #E9D5FF;
+  --lumina-primary-300: #D8B4FE;
+  --lumina-primary-400: #C084FC;
+  --lumina-primary-500: #A855F7;
+  --lumina-primary-600: #9333EA;
+  --lumina-primary-700: #7C3AED;
+  --lumina-primary-800: #6B21A8;
+  --lumina-primary-900: #4A1D6A;
+
+  /* Semantic aliases required by head contract */
+  --lumina-background: var(--lumina-bg);
+  --lumina-foreground: var(--lumina-ink);
+  --lumina-card: var(--lumina-surface);
+  --lumina-card-foreground: var(--lumina-ink);
+  --lumina-popover: var(--lumina-surface);
+  --lumina-popover-foreground: var(--lumina-ink);
+  --lumina-primary: var(--lumina-brand);
+  --lumina-primary-foreground: var(--lumina-brand-ink);
+  --lumina-muted: var(--lumina-surface-2);
+  --lumina-muted-foreground: var(--lumina-ink-2);
+  --lumina-border: var(--lumina-line);
+  --lumina-input: var(--lumina-line);
+  --lumina-ring: var(--lumina-primary-400);
+  --lumina-radius-small: 4px;
+  --lumina-radius-medium: 8px;
+  --lumina-radius-large: 16px;
+
+  /* Spacing */
+  --lumina-s-1: 4px;
+  --lumina-s-2: 8px;
+  --lumina-s-3: 12px;
+  --lumina-s-4: 16px;
+  --lumina-s-5: 24px;
+  --lumina-s-6: 32px;
+  --lumina-s-7: 48px;
+  --lumina-s-8: 80px;
+  --lumina-s-9: 120px;
+
+  /* Radius */
+  --lumina-r-xs: 2px;
+  --lumina-r-sm: 4px;
+  --lumina-r-md: 8px;
+  --lumina-r-lg: 16px;
+  --lumina-r-pill: 999px;
+
+  /* Shadows */
+  --lumina-shadow-1: 0 1px 2px rgba(74, 29, 106, 0.05), 0 1px 1px rgba(74, 29, 106, 0.03);
+  --lumina-shadow-2: 0 8px 24px -8px rgba(74, 29, 106, 0.18);
+  --lumina-shadow-3: 0 24px 60px -20px rgba(74, 29, 106, 0.30);
+
+  /* Typography */
+  --lumina-font-sans: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --lumina-font-display: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --lumina-font-mono: 'SF Mono', 'Fira Code', 'Noto Sans SC', monospace;
+}
+
+@layer base {
+  html, body {
+    font-family: var(--lumina-font-sans);
+    background-color: var(--lumina-bg);
+    color: var(--lumina-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* 禁止鼠标选中文本 */
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--lumina-font-display);
+    color: var(--lumina-ink);
+    font-weight: 600;
+    text-wrap: balance;
+    word-break: keep-all;
+  }
+
+  button, a {
+    transition: transform 160ms cubic-bezier(.2,.8,.2,1), color 160ms cubic-bezier(.2,.8,.2,1), background-color 160ms cubic-bezier(.2,.8,.2,1), box-shadow 160ms cubic-bezier(.2,.8,.2,1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--lumina-background);
+    --color-foreground: var(--lumina-foreground);
+    --color-card: var(--lumina-card);
+    --color-card-foreground: var(--lumina-card-foreground);
+    --color-popover: var(--lumina-popover);
+    --color-popover-foreground: var(--lumina-popover-foreground);
+    --color-primary: var(--lumina-primary);
+    --color-primary-foreground: var(--lumina-primary-foreground);
+    --color-muted: var(--lumina-muted);
+    --color-muted-foreground: var(--lumina-muted-foreground);
+    --color-border: var(--lumina-border);
+    --color-input: var(--lumina-input);
+    --color-ring: var(--lumina-ring);
+    --radius-sm: var(--lumina-radius-small);
+    --radius-md: var(--lumina-radius-medium);
+    --radius-lg: var(--lumina-radius-large);
+  }
+  @layer base {
+    body { background: var(--lumina-background); color: var(--lumina-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+      /* ===== 左侧竖排工具箱(原生按钮, 样式同 doodle 顶部工具但竖排) ===== */
+      .tool-panel {
+        width: 116px;
+        flex-shrink: 0;
+        height: 86vh;
+        overflow-y: auto;
+        background: var(--lumina-surface);
+        border: 1px solid var(--lumina-line);
+        border-radius: var(--lumina-radius-large);
+        box-shadow: var(--lumina-shadow-2);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 26px;
+      }
+      .tool-panel::-webkit-scrollbar { width: 6px; }
+      .tool-panel::-webkit-scrollbar-thumb { background: var(--lumina-line); border-radius: 3px; }
+
+      .tp-group { display: flex; flex-direction: column; }
+      .tp-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--lumina-ink);
+        margin: 0 0 10px;
+      }
+
+      /* 预设颜色色块 */
+      .tp-swatches { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .tp-swatch {
+        width: 30px; height: 30px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        box-shadow: 0 1px 3px rgba(74, 29, 106, .25);
+        cursor: pointer;
+        padding: 0;
+        justify-self: center;
+        transition: transform .12s ease, box-shadow .15s ease;
+      }
+      .tp-swatch:hover { transform: scale(1.12); }
+      .tp-swatch.active { box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--lumina-primary-400); }
+
+      /* 自定义颜色 */
+      .tp-custom {
+        position: relative;
+        width: 30px; height: 30px;
+        border-radius: 50%;
+        border: 1px solid var(--lumina-line);
+        overflow: hidden;
+        cursor: pointer;
+        padding: 0;
+        justify-self: center;
+        background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);
+        transition: box-shadow .15s ease;
+      }
+      .tp-custom.active { box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--lumina-primary-400); }
+      .tp-custom input {
+        position: absolute; inset: 0;
+        width: 150%; height: 150%;
+        left: -25%; top: -25%;
+        border: none; opacity: 0; cursor: pointer;
+      }
+
+      /* 粗细滑块 */
+      .tp-slider {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 4px;
+        border-radius: 4px;
+        background: var(--lumina-primary-100);
+        outline: none;
+        cursor: pointer;
+      }
+      .tp-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 16px; height: 16px;
+        border-radius: 50%;
+        background: var(--lumina-brand);
+        border: 2px solid #fff;
+        box-shadow: 0 1px 4px rgba(168, 85, 247, .5);
+        cursor: pointer;
+      }
+      .tp-slider::-moz-range-thumb {
+        width: 16px; height: 16px;
+        border-radius: 50%;
+        background: var(--lumina-brand);
+        border: 2px solid #fff;
+        cursor: pointer;
+      }
+      .tp-slider-row { display: flex; align-items: center; gap: 8px; }
+      .tp-brush-preview {
+        display: flex; align-items: center; justify-content: center;
+        height: 34px; margin-top: 6px;
+      }
+      .tp-brush-preview span { display: block; border-radius: 50%; background: #222; }
+
+      /* 通用竖排按钮 */
+      .tp-btn {
+        width: 100%;
+        min-height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 9px 12px;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--lumina-ink-2);
+        background: var(--lumina-primary-50);
+        border: 1px solid var(--lumina-line);
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background .15s ease, color .15s ease, border-color .15s ease;
+      }
+      .tp-btn + .tp-btn { margin-top: 24px; }
+      .tp-btn svg.tp-icon { width: 18px; height: 18px; flex-shrink: 0; }
+      .tp-btn:hover { background: var(--lumina-primary-100); }
+      .tp-btn.active {
+        color: var(--lumina-primary-700);
+        background: var(--lumina-primary-100);
+        border-color: var(--lumina-primary-400);
+      }
+      .tp-btn-danger:hover { color: #ef4444; border-color: #ef4444; background: #fef2f2; }
+      .tp-btn-primary {
+        color: #fff;
+        background: linear-gradient(135deg, var(--lumina-primary-500), var(--lumina-primary-600));
+        border-color: transparent;
+        box-shadow: 0 10px 24px -10px rgba(168, 85, 247, .55);
+      }
+      .tp-btn-primary:hover { color: #000000; }
+
+      /* 参考图导入后的控制区 */
+      .tp-ref-controls { display: none; flex-direction: column; margin-top: 8px; }
+      .tp-ref-controls.show { display: flex; }
+      .tp-ref-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+      .tp-opacity-val { font-size: 12px; color: var(--lumina-ink-2); min-width: 34px; text-align: right; }
+
+      /* ===== 右侧双画布(左右隔开, 中间切换按钮) ===== */
+      .duo-canvas {
+        flex: 1;
+        display: flex;
+        align-items: stretch;
+        gap: 70px;
+        position: relative;
+        min-height: 520px;
+      }
+      .canvas-wrap {
+        flex: 1;
+        min-width: 0;
+        border-radius: var(--lumina-radius-large);
+        overflow: hidden;
+        box-shadow: var(--lumina-shadow-2);
+        position: relative;
+        background: #ffffff;  /* 画布底色，参考图铺在它之上、笔迹之下 */
+      }
+      /* 中间互换按钮 */
+      .swap-btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 5;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: 3px solid #fff;
+        background: linear-gradient(135deg, var(--lumina-primary-500), var(--lumina-primary-600));
+        color: #fff;
+        box-shadow: 0 8px 20px -6px rgba(168, 85, 247, .6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 0;
+      }
+      .swap-btn:hover { transform: translate(-50%, -50%) scale(1.1); }
+      .swap-btn svg { width: 20px; height: 20px; }
+      .swap-btn.spin { animation: swapSpin .35s ease; }
+      @keyframes swapSpin {
+        from { transform: translate(-50%, -50%) rotate(0deg); }
+        to   { transform: translate(-50%, -50%) rotate(180deg); }
+      }
+
+      /* 右上角功能按钮(倒计时 / 音乐) */
+      .top-btn {
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 16px;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--lumina-primary-700);
+        background: var(--lumina-surface);
+        border: 1px solid var(--lumina-line);
+        border-radius: 999px;
+        box-shadow: var(--lumina-shadow-1);
+        cursor: pointer;
+        transition: background .15s ease, color .15s ease, border-color .15s ease;
+      }
+      .top-btn:hover { background: var(--lumina-primary-100); }
+      .top-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+      .top-btn-icon { width: 40px; padding: 0; justify-content: center; }
+      .top-btn.running {
+        color: #fff;
+        background: linear-gradient(135deg, var(--lumina-primary-500), var(--lumina-primary-600));
+        border-color: transparent;
+      }
+      .top-btn.playing {
+        color: #fff;
+        background: linear-gradient(135deg, var(--lumina-primary-500), var(--lumina-primary-600));
+        border-color: transparent;
+      }
+
+      .ref-img {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        object-fit: contain;
+        opacity: .35;
+        z-index: 1;
+        pointer-events: none;
+        display: none;
+      }
+      .ref-img.show { display: block; }
+      .board {
+        position: relative;
+        z-index: 2;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        touch-action: none;   /* 禁止触摸时页面滚动，保证手指绘图 */
+        cursor: crosshair;
+      }
+
+      /* 拖拽导入提示遮罩 */
+      .drop-mask {
+        position: absolute;
+        inset: 12px;
+        border: 2px dashed var(--lumina-brand);
+        border-radius: 12px;
+        background: rgba(168, 85, 247, .08);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        color: var(--lumina-primary-600);
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: .5px;
+        pointer-events: none;
+        z-index: 3;
+      }
+      .drop-mask.show { display: flex; }
+
+      /* 轻提示 */
+      .toast {
+        position: fixed;
+        top: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-12px);
+        background: rgba(74, 29, 106, .92);
+        color: #fff;
+        font-size: 13px;
+        padding: 9px 20px;
+        border-radius: 8px;
+        opacity: 0;
+        pointer-events: none;
+        transition: all .25s ease;
+        z-index: 10;
+      }
+      .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col" style="background: url('assets/marble-fluid-texture.jpg') center/100% 100% no-repeat fixed;">
+  <main class="flex-1 flex flex-col w-full">
+    <div class="max-w-[1680px] mx-auto px-8 py-10 w-full flex-1 flex flex-col">
+      <div class="flex flex-1 gap-6 min-h-0">
+
+        <!-- 左侧工具箱: 外部盒子高度 100%, 内部为 doodle 同款功能按钮(竖排) -->
+        <aside class="tool-panel">
+          <!-- 颜色 -->
+          <div class="tp-group">
+            <p class="tp-label">Color</p>
+            <div class="tp-swatches" id="swatches">
+              <label class="tp-custom" title="Custom color">
+                <input type="color" id="colorPicker" value="#222222">
+              </label>
+            </div>
+          </div>
+
+          <!-- 粗细 -->
+          <div class="tp-group">
+            <p class="tp-label">Size</p>
+            <div class="tp-slider-row">
+              <input type="range" class="tp-slider" id="sizeSlider" min="1" max="50" value="6">
+            </div>
+            <div class="tp-brush-preview"><span id="brushDot"></span></div>
+          </div>
+
+          <!-- 操作按钮(等距竖排, 不用分隔线) -->
+          <div class="tp-group">
+            <button class="tp-btn" id="eraserBtn" type="button" title="Eraser" aria-label="Eraser">
+              <svg class="tp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/>
+                <path d="M22 21H7"/>
+                <path d="m5 11 9 9"/>
+              </svg>
+            </button>
+            <button class="tp-btn" id="undoBtn" type="button">Undo</button>
+            <button class="tp-btn" id="clearBtn" type="button">Clear Canvas</button>
+            <button class="tp-btn tp-btn-primary" id="saveBtn" type="button">Save Image</button>
+          </div>
+
+          <!-- 临摹参考图(仅拖拽图片到画布导入后显示控制项) -->
+          <div class="tp-group" id="refGroup" style="display:none;">
+            <p class="tp-label">Reference</p>
+            <div class="tp-ref-controls show" id="refControls">
+              <button class="tp-btn" id="refToggleBtn" type="button">Hide Reference</button>
+              <div class="tp-ref-row">
+                <input type="range" class="tp-slider" id="refOpacity" min="5" max="100" value="35" title="Reference opacity">
+                <span class="tp-opacity-val" id="refOpacityVal">35%</span>
+              </div>
+              <button class="tp-btn tp-btn-danger" id="refRemoveBtn" type="button">Remove</button>
+            </div>
+          </div>
+        </aside>
+
+        <!-- 右侧双画布区域 -->
+        <section class="flex-1 flex flex-col gap-4 min-w-0">
+          <div class="flex items-center justify-between gap-4 shrink-0">
+            <h1 class="text-2xl font-semibold" style="color: var(--lumina-ink);">Free Canvas</h1>
+            <div class="flex items-center gap-3">
+              <!-- 5 分钟倒计时: 点击开始 / 暂停, 结束自动复位 -->
+              <button class="top-btn" id="timerBtn" type="button" title="Start / Pause countdown">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="13" r="8"/>
+                  <path d="M12 9v4l2 2"/>
+                  <path d="M9 2h6"/>
+                </svg>
+                <span id="timerText">05:00</span>
+              </button>
+              <!-- 背景音乐播放 / 暂停 -->
+              <button class="top-btn top-btn-icon" id="musicBtn" type="button" title="Play / Pause music" aria-label="Play music">
+                <svg id="musicIconPlay" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+                <svg id="musicIconPause" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
+                  <path d="M6 5h4v14H6zM14 5h4v14h-4z"/>
+                </svg>
+              </button>
+              <audio id="bgm" preload="none"></audio>
+            </div>
+          </div>
+
+          <div class="duo-canvas" id="duoCanvas">
+            <!-- 左画布 -->
+            <div class="canvas-wrap" data-pane>
+              <img class="ref-img" alt="Reference image" draggable="false">
+              <canvas class="board"></canvas>
+              <div class="drop-mask">Release to import as reference</div>
+            </div>
+
+            <!-- 中间互换按钮 -->
+            <button class="swap-btn" id="swapBtn" type="button" title="Swap canvases" aria-label="Swap canvases">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 3 4 7l4 4"/>
+                <path d="M4 7h16"/>
+                <path d="m16 21 4-4-4-4"/>
+                <path d="M20 17H4"/>
+              </svg>
+            </button>
+
+            <!-- 右画布 -->
+            <div class="canvas-wrap" data-pane>
+              <img class="ref-img" alt="Reference image" draggable="false">
+              <canvas class="board"></canvas>
+              <div class="drop-mask">Release to import as reference</div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer style="background: var(--lumina-surface); border-top: 1px solid var(--lumina-line);">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-center text-sm" style="color: var(--lumina-ink-2);">
+      <p>Lumina Stroke Gallery</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+<script src="components/save-to-works.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var PRESET_COLORS = ['#222222', '#ef4444', '#f97316', '#f5c518',
+                       '#22c55e', '#06b6d4', '#3b82f6'];
+  var HISTORY_LIMIT = 15;
+
+  // 工具箱的全局画笔设置, 两块画布共用
+  var state = {
+    color: '#222222',
+    size: 6,
+    mode: 'brush'        // brush | eraser
+  };
+
+  /* ---------- 为每一块画布建立独立状态 ---------- */
+  var panes = Array.prototype.map.call(document.querySelectorAll('[data-pane]'), function (wrap) {
+    return {
+      wrap: wrap,
+      canvas: wrap.querySelector('.board'),
+      ctx: wrap.querySelector('.board').getContext('2d'),
+      refImg: wrap.querySelector('.ref-img'),
+      dropMask: wrap.querySelector('.drop-mask'),
+      history: [],
+      logicalW: 0,
+      logicalH: 0,
+      drawing: false,
+      lastX: 0,
+      lastY: 0,
+      refURL: null,
+      refVisible: true,
+      opacity: .35
+    };
+  });
+
+  var current = panes[0];   // 当前操作的画布(最后一次落笔/拖入的那块)
+
+  /* ---------- 画布初始化（处理高分屏，保证笔迹清晰） ---------- */
+  function setupPane(pane) {
+    var rect = pane.wrap.getBoundingClientRect();
+    var dpr = window.devicePixelRatio || 1;
+    pane.logicalW = rect.width;
+    pane.logicalH = rect.height;
+    pane.canvas.width = Math.round(rect.width * dpr);
+    pane.canvas.height = Math.round(rect.height * dpr);
+    pane.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    pane.ctx.lineCap = 'round';
+    pane.ctx.lineJoin = 'round';
+  }
+
+  function setupAll() { panes.forEach(setupPane); }
+
+  /* ---------- 坐标换算（CSS 像素 -> 画布逻辑坐标） ---------- */
+  function getPos(e, pane) {
+    var rect = pane.canvas.getBoundingClientRect();
+    return {
+      x: (e.clientX - rect.left) * (pane.logicalW / rect.width),
+      y: (e.clientY - rect.top) * (pane.logicalH / rect.height)
+    };
+  }
+
+  /* ---------- 撤销历史(每块画布独立, 直接存取原始像素) ---------- */
+  function pushHistory(pane) {
+    try {
+      if (pane.history.length >= HISTORY_LIMIT) pane.history.shift();
+      pane.history.push(pane.ctx.getImageData(0, 0, pane.canvas.width, pane.canvas.height));
+    } catch (err) { /* 画布尺寸异常时忽略本次快照 */ }
+  }
+
+  function undo() {
+    if (!current.history.length) { showToast('Nothing to undo'); return; }
+    current.ctx.putImageData(current.history.pop(), 0, 0);
+  }
+
+  /* ---------- 绘制 ---------- */
+  function startDraw(e, pane) {
+    current = pane;
+    syncRefUI();
+    pushHistory(pane);
+    pane.drawing = true;
+    var p = getPos(e, pane);
+    pane.lastX = p.x;
+    pane.lastY = p.y;
+    pane.canvas.setPointerCapture(e.pointerId);
+
+    pane.ctx.globalCompositeOperation = state.mode === 'eraser' ? 'destination-out' : 'source-over';
+    pane.ctx.beginPath();
+    pane.ctx.fillStyle = state.color;
+    pane.ctx.arc(p.x, p.y, state.size / 2, 0, Math.PI * 2);
+    pane.ctx.fill();
+  }
+
+  function drawMove(e, pane) {
+    if (!pane.drawing) return;
+    e.preventDefault();
+    var p = getPos(e, pane);
+    pane.ctx.globalCompositeOperation = state.mode === 'eraser' ? 'destination-out' : 'source-over';
+    pane.ctx.strokeStyle = state.color;
+    pane.ctx.lineWidth = state.size;
+    pane.ctx.beginPath();
+    pane.ctx.moveTo(pane.lastX, pane.lastY);
+    pane.ctx.lineTo(p.x, p.y);
+    pane.ctx.stroke();
+    pane.lastX = p.x;
+    pane.lastY = p.y;
+  }
+
+  function endDraw(e, pane) {
+    if (!pane.drawing) return;
+    pane.drawing = false;
+    try { pane.canvas.releasePointerCapture(e.pointerId); } catch (err) {}
+  }
+
+  panes.forEach(function (pane) {
+    pane.canvas.addEventListener('pointerdown', function (e) { startDraw(e, pane); });
+    pane.canvas.addEventListener('pointermove', function (e) { drawMove(e, pane); });
+    pane.canvas.addEventListener('pointerup', function (e) { endDraw(e, pane); });
+    pane.canvas.addEventListener('pointercancel', function (e) { endDraw(e, pane); });
+  });
+
+  /* ---------- 两块画布互换位置(笔迹随 DOM 一起移动) ---------- */
+  var duo = document.getElementById('duoCanvas');
+  var swapBtn = document.getElementById('swapBtn');
+  var swapped = false;
+  swapBtn.addEventListener('click', function () {
+    if (swapped) {
+      duo.insertBefore(panes[0].wrap, panes[1].wrap);
+    } else {
+      duo.insertBefore(panes[1].wrap, panes[0].wrap);
+    }
+    swapped = !swapped;
+    // 旋转动效反馈
+    swapBtn.classList.remove('spin');
+    void swapBtn.offsetWidth;
+    swapBtn.classList.add('spin');
+  });
+
+  /* ---------- 颜色选择 ---------- */
+  var swatchesBox = document.getElementById('swatches');
+  PRESET_COLORS.forEach(function (c) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'tp-swatch' + (c === state.color ? ' active' : '');
+    b.style.background = c;
+    b.title = c;
+    b.addEventListener('click', function () { setColor(c, b, false); });
+    swatchesBox.appendChild(b);
+  });
+
+  var customLabel = document.querySelector('.tp-custom');
+  swatchesBox.appendChild(customLabel);
+
+  function setColor(c, el, fromCustom) {
+    state.color = c;
+    state.mode = 'brush';
+    updateModeUI();
+    document.querySelectorAll('.tp-swatch').forEach(function (s) { s.classList.remove('active'); });
+    customLabel.classList.toggle('active', !!fromCustom);
+    if (el) el.classList.add('active');
+    updateBrushDot();
+  }
+
+  document.getElementById('colorPicker').addEventListener('input', function (e) {
+    setColor(e.target.value, null, true);
+  });
+
+  /* ---------- 粗细调节 ---------- */
+  var sizeSlider = document.getElementById('sizeSlider');
+  var brushDot = document.getElementById('brushDot');
+
+  function updateBrushDot() {
+    var d = Math.max(3, Math.min(30, state.size));
+    brushDot.style.width = d + 'px';
+    brushDot.style.height = d + 'px';
+    brushDot.style.background = state.mode === 'eraser' ? '#fff' : state.color;
+    brushDot.style.border = state.mode === 'eraser' ? '1px dashed #bbb' : 'none';
+  }
+
+  sizeSlider.addEventListener('input', function () {
+    state.size = parseInt(this.value, 10);
+    updateBrushDot();
+  });
+
+  /* ---------- 橡皮擦 / 撤销 / 清空(作用于当前画布) ---------- */
+  var eraserBtn = document.getElementById('eraserBtn');
+
+  function updateModeUI() {
+    eraserBtn.classList.toggle('active', state.mode === 'eraser');
+  }
+
+  eraserBtn.addEventListener('click', function () {
+    state.mode = state.mode === 'eraser' ? 'brush' : 'eraser';
+    updateModeUI();
+    updateBrushDot();
+  });
+
+  document.getElementById('undoBtn').addEventListener('click', undo);
+
+  document.getElementById('clearBtn').addEventListener('click', function () {
+    pushHistory(current);
+    current.ctx.clearRect(0, 0, current.logicalW, current.logicalH);
+    showToast('Canvas cleared');
+  });
+
+  /* ---------- 临摹参考图(每块画布独立; 工具箱控制当前画布) ---------- */
+  var refGroup = document.getElementById('refGroup');
+  var refToggleBtn = document.getElementById('refToggleBtn');
+  var refOpacity = document.getElementById('refOpacity');
+  var refOpacityVal = document.getElementById('refOpacityVal');
+
+  function paneHasRef(pane) { return !!(pane.refURL || pane.refImg.getAttribute('src')); }
+
+  // 工具箱参考图控件与当前画布状态同步
+  function syncRefUI() {
+    var has = paneHasRef(current);
+    refGroup.style.display = has ? '' : 'none';
+    if (!has) return;
+    refToggleBtn.textContent = current.refVisible ? 'Hide Reference' : 'Show Reference';
+    refOpacity.value = Math.round(current.opacity * 100);
+    refOpacityVal.textContent = refOpacity.value + '%';
+  }
+
+  function loadRefFile(pane, file) {
+    if (!file || !/^image\//.test(file.type)) { showToast('Please select an image file'); return; }
+    if (pane.refURL) URL.revokeObjectURL(pane.refURL);
+    pane.refURL = URL.createObjectURL(file);
+    pane.refImg.onload = function () {
+      pane.refVisible = true;
+      pane.refImg.classList.add('show');
+      current = pane;
+      syncRefUI();
+      showToast('Reference imported — start tracing');
+    };
+    pane.refImg.src = pane.refURL;
+  }
+
+  refToggleBtn.addEventListener('click', function () {
+    if (!paneHasRef(current)) return;
+    current.refVisible = !current.refVisible;
+    current.refImg.classList.toggle('show', current.refVisible);
+    this.textContent = current.refVisible ? 'Hide Reference' : 'Show Reference';
+  });
+
+  refOpacity.addEventListener('input', function () {
+    current.opacity = this.value / 100;
+    current.refImg.style.opacity = current.opacity;
+    refOpacityVal.textContent = this.value + '%';
+  });
+
+  document.getElementById('refRemoveBtn').addEventListener('click', function () {
+    if (current.refURL) { URL.revokeObjectURL(current.refURL); current.refURL = null; }
+    current.refImg.removeAttribute('src');
+    current.refImg.classList.remove('show');
+    syncRefUI();
+    showToast('Reference removed');
+  });
+
+  /* 拖拽图片到对应画布即可导入；计数器消除跨子元素时的 dragleave 闪烁 */
+  panes.forEach(function (pane) {
+    var dragDepth = 0;
+    function dragHasFile(e) {
+      return e.dataTransfer &&
+             Array.prototype.indexOf.call(e.dataTransfer.types, 'Files') !== -1;
+    }
+    pane.wrap.addEventListener('dragenter', function (e) {
+      if (!dragHasFile(e)) return;
+      dragDepth++;
+      pane.dropMask.classList.add('show');
+    });
+    pane.wrap.addEventListener('dragover', function (e) {
+      if (!dragHasFile(e)) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'copy';
+    });
+    pane.wrap.addEventListener('dragleave', function () {
+      dragDepth = Math.max(0, dragDepth - 1);
+      if (dragDepth === 0) pane.dropMask.classList.remove('show');
+    });
+    pane.wrap.addEventListener('drop', function (e) {
+      e.preventDefault();
+      dragDepth = 0;
+      pane.dropMask.classList.remove('show');
+      current = pane;
+      syncRefUI();
+      var file = e.dataTransfer.files && e.dataTransfer.files[0];
+      if (file) loadRefFile(pane, file);
+    });
+  });
+
+  /* ---------- 保存（两块画布分别导出, 合成白底 PNG, 直接写入 works 文件夹） ---------- */
+  // 检测画布是否有笔迹(扫描 alpha 通道, 有任意不透明像素即为非空)
+  function paneHasContent(pane) {
+    var data = pane.ctx.getImageData(0, 0, pane.canvas.width, pane.canvas.height).data;
+    for (var i = 3; i < data.length; i += 4) {
+      if (data[i] !== 0) return true;
+    }
+    return false;
+  }
+
+  function exportPane(pane) {
+    var out = document.createElement('canvas');
+    out.width = pane.canvas.width;
+    out.height = pane.canvas.height;
+    var octx = out.getContext('2d');
+    octx.fillStyle = '#ffffff';
+    octx.fillRect(0, 0, out.width, out.height);
+    octx.drawImage(pane.canvas, 0, 0);
+    return out.toDataURL('image/png');
+  }
+
+  document.getElementById('saveBtn').addEventListener('click', async function () {
+    var ts = new Date();
+    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    var stamp = ts.getFullYear() + pad(ts.getMonth() + 1) + pad(ts.getDate())
+             + '_' + pad(ts.getHours()) + pad(ts.getMinutes()) + pad(ts.getSeconds());
+
+    // 按当前视觉位置编号: 左边为画布1, 右边为画布2
+    var leftPane = swapped ? panes[1] : panes[0];
+    var rightPane = swapped ? panes[0] : panes[1];
+
+    // 两块画布都必须有内容才允许保存
+    if (!paneHasContent(leftPane)) {
+      showToast('Canvas 1 is empty - draw something first');
+      return;
+    }
+    if (!paneHasContent(rightPane)) {
+      showToast('Canvas 2 is empty - draw something first');
+      return;
+    }
+
+    showToast('Saving both canvases...');
+
+    // 先同步导出两张图, 并检查尺寸是否正常
+    var dataURL1 = exportPane(leftPane);
+    var dataURL2 = exportPane(rightPane);
+    console.log('[save] left canvas size:', leftPane.canvas.width + 'x' + leftPane.canvas.height, 'bytes:', dataURL1.length);
+    console.log('[save] right canvas size:', rightPane.canvas.width + 'x' + rightPane.canvas.height, 'bytes:', dataURL2.length);
+
+    var name1 = 'lumina-game-canvas1_' + stamp + '.png';
+    var name2 = 'lumina-game-canvas2_' + stamp + '.png';
+    var results = await window.saveManyToWorks([
+      { dataURL: dataURL1, fileName: name1 },
+      { dataURL: dataURL2, fileName: name2 }
+    ]);
+    console.log('[save] results:', name1, '=', results[0], '|', name2, '=', results[1]);
+
+    var okCount = results.filter(function (r) { return r === 'saved' || r === 'unsupported' || r === 'error'; }).length;
+    showToast('Saved ' + okCount + '/2 — ' + results[0] + ', ' + results[1]);
+
+    // 有作品成功保存时, 2 秒后自动刷新页面; 两张都取消则不刷新
+    if (okCount > 0) {
+      setTimeout(function () { location.reload(); }, 2000);
+    }
+  });
+
+  /* ---------- 轻提示 ---------- */
+  var toastEl = document.getElementById('toast');
+  var toastTimer = null;
+  function showToast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 1600);
+  }
+
+  /* ---------- 快捷键：Ctrl+Z 撤销，E 切橡皮，H 切换参考图 ---------- */
+  document.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
+      e.preventDefault();
+      undo();
+    } else if (e.key.toLowerCase() === 'e' && e.target.tagName !== 'INPUT') {
+      eraserBtn.click();
+    } else if (e.key.toLowerCase() === 'h' && e.target.tagName !== 'INPUT' && paneHasRef(current)) {
+      refToggleBtn.click();
+    }
+  });
+
+  /* ---------- 右上角: 5 分钟倒计时 + 背景音乐 ---------- */
+  var TIMER_TOTAL = 5 * 60;
+  var remain = TIMER_TOTAL;
+  var timerId = null;
+  var timerBtn = document.getElementById('timerBtn');
+  var timerText = document.getElementById('timerText');
+
+  function formatTime(s) {
+    var m = Math.floor(s / 60);
+    var sec = s % 60;
+    return (m < 10 ? '0' : '') + m + ':' + (sec < 10 ? '0' : '') + sec;
+  }
+
+  function stopTimer() {
+    clearInterval(timerId);
+    timerId = null;
+    timerBtn.classList.remove('running');
+  }
+
+  timerBtn.addEventListener('click', function () {
+    if (timerId) {                 // 运行中 -> 暂停
+      stopTimer();
+      return;
+    }
+    if (remain <= 0) remain = TIMER_TOTAL;   // 结束后再次点击重新开始
+    timerBtn.classList.add('running');
+    timerId = setInterval(function () {
+      remain--;
+      timerText.textContent = formatTime(Math.max(0, remain));
+      if (remain <= 0) {
+        stopTimer();
+        timerText.textContent = '05:00';
+        remain = TIMER_TOTAL;
+        showToast("Time's up!");
+        swapBtn.click();   // 倒计时结束自动互换两块画布
+      }
+    }, 1000);
+  });
+
+  var musicBtn = document.getElementById('musicBtn');
+  var bgm = document.getElementById('bgm');
+  var iconPlay = document.getElementById('musicIconPlay');
+  var iconPause = document.getElementById('musicIconPause');
+
+  // assets/music 中的三首歌, 按顺序播放, 播完最后一首回到第一首
+  var tracks = [
+    'assets/music/青花瓷.mp3',
+    'assets/music/《想你》- Kw_赵丽颖 - 1.【无损】《想你》- Kw_赵丽颖(Av617969176,P1).mp3',
+    'assets/music/DJ小暴-Love U2·热搜1.mp3',
+  ];
+  var trackIndex = 0;
+
+  function setMusicPlayingUI() {
+    musicBtn.classList.add('playing');
+    iconPlay.style.display = 'none';
+    iconPause.style.display = '';
+  }
+  function setMusicPausedUI() {
+    musicBtn.classList.remove('playing');
+    iconPlay.style.display = '';
+    iconPause.style.display = 'none';
+  }
+
+  function playTrack(i) {
+    trackIndex = i;
+    bgm.src = encodeURI(tracks[i]);
+    var p = bgm.play();
+    if (p && p.catch) {
+      p.then(setMusicPlayingUI).catch(function () { showToast('Unable to play music'); });
+    } else {
+      setMusicPlayingUI();
+    }
+  }
+
+  // 一首播完自动切下一首
+  bgm.addEventListener('ended', function () {
+    playTrack((trackIndex + 1) % tracks.length);
+  });
+  bgm.addEventListener('error', function () {
+    if (musicBtn.classList.contains('playing')) {
+      setMusicPausedUI();
+      showToast('Failed to load track ' + (trackIndex + 1));
+    }
+  });
+
+  musicBtn.addEventListener('click', function () {
+    if (bgm.paused) {
+      // 已暂停且已有 src -> 继续播放; 首次点击 -> 从第一首开始
+      if (bgm.getAttribute('src')) {
+        var p = bgm.play();
+        if (p && p.catch) { p.then(setMusicPlayingUI).catch(function () { playTrack(trackIndex); }); }
+        else setMusicPlayingUI();
+      } else {
+        playTrack(0);
+      }
+    } else {
+      bgm.pause();
+      setMusicPausedUI();
+    }
+  });
+
+  /* ---------- 窗口尺寸变化时重建画布 ---------- */
+  var resizeTimer = null;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(setupAll, 150);
+  });
+
+  /* ---------- 启动 ---------- */
+  setupAll();
+  updateBrushDot();
+  syncRefUI();
+})();
+</script>
+</body>
+</html>

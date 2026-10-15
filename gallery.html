@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery · Lumina Stroke Gallery</title>
+    <style id="theme-vars">
+/* Lumina Stroke Gallery — Brand tokens for PC web UI */
+
+:root {
+  /* Core palette */
+  --lumina-bg: #FAF5FF;
+  --lumina-surface: #FFFFFF;
+  --lumina-surface-2: #F3E8FF;
+  --lumina-ink: #4A1D6A;
+  --lumina-ink-2: #7C3AED;
+  --lumina-ink-3: #A78BFA;
+  --lumina-line: #E9D5FF;
+  --lumina-brand: #A855F7;
+  --lumina-brand-ink: #FFFFFF;
+
+  /* Primary scale (single hue) */
+  --lumina-primary-50: #FAF5FF;
+  --lumina-primary-100: #F3E8FF;
+  --lumina-primary-200: #E9D5FF;
+  --lumina-primary-300: #D8B4FE;
+  --lumina-primary-400: #C084FC;
+  --lumina-primary-500: #A855F7;
+  --lumina-primary-600: #9333EA;
+  --lumina-primary-700: #7C3AED;
+  --lumina-primary-800: #6B21A8;
+  --lumina-primary-900: #4A1D6A;
+
+  /* Semantic aliases required by head contract */
+  --lumina-background: var(--lumina-bg);
+  --lumina-foreground: var(--lumina-ink);
+  --lumina-card: var(--lumina-surface);
+  --lumina-card-foreground: var(--lumina-ink);
+  --lumina-popover: var(--lumina-surface);
+  --lumina-popover-foreground: var(--lumina-ink);
+  --lumina-primary: var(--lumina-brand);
+  --lumina-primary-foreground: var(--lumina-brand-ink);
+  --lumina-muted: var(--lumina-surface-2);
+  --lumina-muted-foreground: var(--lumina-ink-2);
+  --lumina-border: var(--lumina-line);
+  --lumina-input: var(--lumina-line);
+  --lumina-ring: var(--lumina-primary-400);
+  --lumina-radius-small: 4px;
+  --lumina-radius-medium: 8px;
+  --lumina-radius-large: 16px;
+
+  /* Spacing */
+  --lumina-s-1: 4px;
+  --lumina-s-2: 8px;
+  --lumina-s-3: 12px;
+  --lumina-s-4: 16px;
+  --lumina-s-5: 24px;
+  --lumina-s-6: 32px;
+  --lumina-s-7: 48px;
+  --lumina-s-8: 80px;
+  --lumina-s-9: 120px;
+
+  /* Radius */
+  --lumina-r-xs: 2px;
+  --lumina-r-sm: 4px;
+  --lumina-r-md: 8px;
+  --lumina-r-lg: 16px;
+  --lumina-r-pill: 999px;
+
+  /* Shadows */
+  --lumina-shadow-1: 0 1px 2px rgba(74, 29, 106, 0.05), 0 1px 1px rgba(74, 29, 106, 0.03);
+  --lumina-shadow-2: 0 8px 24px -8px rgba(74, 29, 106, 0.18);
+  --lumina-shadow-3: 0 24px 60px -20px rgba(74, 29, 106, 0.30);
+
+  /* Typography */
+  --lumina-font-sans: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --lumina-font-display: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --lumina-font-mono: 'SF Mono', 'Fira Code', 'Noto Sans SC', monospace;
+}
+
+@layer base {
+  html, body {
+    font-family: var(--lumina-font-sans);
+    background-color: var(--lumina-bg);
+    color: var(--lumina-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* 禁止鼠标选中文本 */
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--lumina-font-display);
+    color: var(--lumina-ink);
+    font-weight: 600;
+    text-wrap: balance;
+    word-break: keep-all;
+  }
+
+  button, a {
+    transition: transform 160ms cubic-bezier(.2,.8,.2,1), color 160ms cubic-bezier(.2,.8,.2,1), background-color 160ms cubic-bezier(.2,.8,.2,1), box-shadow 160ms cubic-bezier(.2,.8,.2,1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--lumina-background);
+    --color-foreground: var(--lumina-foreground);
+    --color-card: var(--lumina-card);
+    --color-card-foreground: var(--lumina-card-foreground);
+    --color-popover: var(--lumina-popover);
+    --color-popover-foreground: var(--lumina-popover-foreground);
+    --color-primary: var(--lumina-primary);
+    --color-primary-foreground: var(--lumina-primary-foreground);
+    --color-muted: var(--lumina-muted);
+    --color-muted-foreground: var(--lumina-muted-foreground);
+    --color-border: var(--lumina-border);
+    --color-input: var(--lumina-input);
+    --color-ring: var(--lumina-ring);
+    --radius-sm: var(--lumina-radius-small);
+    --radius-md: var(--lumina-radius-medium);
+    --radius-lg: var(--lumina-radius-large);
+  }
+  @layer base {
+    body { background: var(--lumina-background); color: var(--lumina-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--lumina-background); }
+      .text-background { color: var(--lumina-background); }
+      .border-background { border-color: var(--lumina-background); }
+      .ring-background { --tw-ring-color: var(--lumina-background); }
+      .bg-foreground { background-color: var(--lumina-foreground); }
+      .text-foreground { color: var(--lumina-foreground); }
+      .border-foreground { border-color: var(--lumina-foreground); }
+      .ring-foreground { --tw-ring-color: var(--lumina-foreground); }
+      .bg-card { background-color: var(--lumina-card); }
+      .text-card { color: var(--lumina-card); }
+      .border-card { border-color: var(--lumina-card); }
+      .ring-card { --tw-ring-color: var(--lumina-card); }
+      .bg-card-foreground { background-color: var(--lumina-card-foreground); }
+      .text-card-foreground { color: var(--lumina-card-foreground); }
+      .border-card-foreground { border-color: var(--lumina-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--lumina-card-foreground); }
+      .bg-popover { background-color: var(--lumina-popover); }
+      .text-popover { color: var(--lumina-popover); }
+      .border-popover { border-color: var(--lumina-popover); }
+      .ring-popover { --tw-ring-color: var(--lumina-popover); }
+      .bg-popover-foreground { background-color: var(--lumina-popover-foreground); }
+      .text-popover-foreground { color: var(--lumina-popover-foreground); }
+      .border-popover-foreground { border-color: var(--lumina-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--lumina-popover-foreground); }
+      .bg-primary { background-color: var(--lumina-primary); }
+      .text-primary { color: var(--lumina-primary); }
+      .border-primary { border-color: var(--lumina-primary); }
+      .ring-primary { --tw-ring-color: var(--lumina-primary); }
+      .bg-primary-foreground { background-color: var(--lumina-primary-foreground); }
+      .text-primary-foreground { color: var(--lumina-primary-foreground); }
+      .border-primary-foreground { border-color: var(--lumina-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--lumina-primary-foreground); }
+      .bg-muted { background-color: var(--lumina-muted); }
+      .text-muted { color: var(--lumina-muted); }
+      .border-muted { border-color: var(--lumina-muted); }
+      .ring-muted { --tw-ring-color: var(--lumina-muted); }
+      .bg-muted-foreground { background-color: var(--lumina-muted-foreground); }
+      .text-muted-foreground { color: var(--lumina-muted-foreground); }
+      .border-muted-foreground { border-color: var(--lumina-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--lumina-muted-foreground); }
+      .bg-border { background-color: var(--lumina-border); }
+      .text-border { color: var(--lumina-border); }
+      .border-border { border-color: var(--lumina-border); }
+      .ring-border { --tw-ring-color: var(--lumina-border); }
+      .bg-input { background-color: var(--lumina-input); }
+      .text-input { color: var(--lumina-input); }
+      .border-input { border-color: var(--lumina-input); }
+      .ring-input { --tw-ring-color: var(--lumina-input); }
+      .bg-ring { background-color: var(--lumina-ring); }
+      .text-ring { color: var(--lumina-ring); }
+      .border-ring { border-color: var(--lumina-ring); }
+      .ring-ring { --tw-ring-color: var(--lumina-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col" style="background: url('assets/marble-fluid-texture.jpg') center/100% 100% no-repeat fixed;">
+  <main class="relative flex-1 flex flex-col">
+
+    <div class="max-w-7xl mx-auto px-6 py-10 flex-1 flex flex-col w-full">
+      <div class="text-center mb-10">
+        <h1 class="text-3xl md:text-4xl font-semibold mb-2" style="color: var(--lumina-ink);">My Gallery</h1>
+        <p class="text-base" style="color: var(--lumina-ink-2);">Every piece is a unique creation</p>
+      </div>
+
+      <section id="worksGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-start flex-1 content-start"></section>
+
+      <div id="worksStatus" class="hidden flex-1 min-h-[320px] flex-col items-center justify-center gap-5 rounded-3xl" style="background: rgba(255,255,255,0.72); border: 1px solid var(--lumina-line); box-shadow: var(--lumina-shadow-1);">
+        <p id="worksStatusText" class="text-base" style="color: var(--lumina-ink-2);">Loading your works...</p>
+        <button id="loadWorksBtn" type="button" class="hidden px-6 py-3 rounded-full text-white font-medium transition hover:-translate-y-0.5" style="background: var(--lumina-brand); box-shadow: 0 8px 20px -6px rgba(168,85,247,0.45);">Choose Works Folder</button>
+      </div>
+    </div>
+  </main>
+  <footer style="background: rgba(255,255,255,0.85); backdrop-filter: blur(6px); border-top: 1px solid var(--lumina-line);">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-center text-sm" style="color: var(--lumina-ink-2);">
+      <p>Lumina Stroke Gallery</p>
+    </div>
+  </footer>
+  <!-- 大图预览弹窗 -->
+  <div id="previewModal" class="hidden fixed inset-0 z-50 items-center justify-center p-8" style="background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px);">
+    <button id="previewClose" type="button" aria-label="Close" class="absolute top-6 right-6 w-11 h-11 rounded-full bg-white/90 flex items-center justify-center shadow-lg hover:scale-105 transition">
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#4A1D6A" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <img id="previewImg" class="max-w-[90vw] max-h-[85vh] rounded-xl shadow-2xl bg-white object-contain" alt="">
+  </div>
+
+  <script src="components/save-to-works.js"></script>
+  <script>
+    (function () {
+      var grid = document.getElementById('worksGrid');
+      var statusBox = document.getElementById('worksStatus');
+      var statusText = document.getElementById('worksStatusText');
+      var loadBtn = document.getElementById('loadWorksBtn');
+      var objectURLs = [];
+
+      /* ===== 大图预览弹窗 ===== */
+      var previewModal = document.getElementById('previewModal');
+      var previewImg = document.getElementById('previewImg');
+      var previewClose = document.getElementById('previewClose');
+
+      function openPreview(url, name) {
+        previewImg.src = url;
+        previewImg.alt = name;
+        previewModal.classList.remove('hidden');
+        previewModal.classList.add('flex');
+      }
+
+      function closePreview() {
+        previewModal.classList.add('hidden');
+        previewModal.classList.remove('flex');
+        previewImg.src = '';
+      }
+
+      previewClose.addEventListener('click', closePreview);
+      previewModal.addEventListener('click', function (e) {
+        if (e.target === previewModal) closePreview();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !previewModal.classList.contains('hidden')) closePreview();
+      });
+
+      function clearGrid() {
+        objectURLs.forEach(URL.revokeObjectURL);
+        objectURLs = [];
+        grid.innerHTML = '';
+      }
+
+      function showStatus(message, showButton) {
+        grid.classList.add('hidden');
+        statusBox.classList.remove('hidden');
+        statusBox.classList.add('flex');
+        statusText.textContent = message;
+        loadBtn.classList.toggle('hidden', !showButton);
+      }
+
+      function hideStatus() {
+        statusBox.classList.add('hidden');
+        statusBox.classList.remove('flex');
+        loadBtn.classList.add('hidden');
+        grid.classList.remove('hidden');
+      }
+
+      /* 7 种画框模板, 作品按顺序循环使用; createInner 返回画框内部的图片容器 */
+      var FRAMES = [
+        { // 圆形虚线边
+          article: 'group relative p-2 transition hover:-translate-y-2',
+          articleStyle: 'background: var(--lumina-surface); border-radius: 50%; box-shadow: var(--lumina-shadow-2); border: 6px dashed var(--lumina-primary-300);',
+          inner: 'aspect-square overflow-hidden rounded-full',
+          innerStyle: 'background: #ffffff;'
+        },
+        { // 条纹框
+          article: 'group relative p-3 transition hover:-translate-y-2',
+          articleStyle: 'background: var(--lumina-surface); border: 10px solid var(--lumina-primary-200); border-image: repeating-linear-gradient(45deg, var(--lumina-primary-200), var(--lumina-primary-200) 8px, var(--lumina-surface) 8px, var(--lumina-surface) 16px) 10; box-shadow: var(--lumina-shadow-2);',
+          inner: 'aspect-[4/3] overflow-hidden',
+          innerStyle: 'background: #ffffff;'
+        },
+        { // 椭圆框
+          article: 'group relative p-3 transition hover:-translate-y-2',
+          articleStyle: 'background: var(--lumina-surface); border-radius: 999px; box-shadow: var(--lumina-shadow-2); border: 8px solid var(--lumina-primary-100);',
+          inner: 'aspect-[3/4] overflow-hidden',
+          innerStyle: 'border-radius: 999px; background: #ffffff;'
+        },
+        { // 心形框
+          article: 'group relative transition hover:-translate-y-2',
+          articleStyle: 'filter: drop-shadow(var(--lumina-shadow-2));',
+          heart: true
+        },
+        { // 云朵形框
+          article: 'group relative p-3 transition hover:-translate-y-2',
+          articleStyle: 'background: var(--lumina-surface); border-radius: 60% 40% 50% 70% / 50% 60% 40% 60%; box-shadow: var(--lumina-shadow-2); border: 6px solid var(--lumina-primary-200);',
+          inner: 'aspect-square overflow-hidden',
+          innerStyle: 'border-radius: 60% 40% 50% 70% / 50% 60% 40% 60%; background: #ffffff;'
+        },
+        { // 金色双线框
+          article: 'group relative p-3 transition hover:-translate-y-2',
+          articleStyle: 'background: #FEF3C7; border: 8px double var(--lumina-primary-300); box-shadow: var(--lumina-shadow-2); border-radius: 4px;',
+          inner: 'aspect-[4/3] overflow-hidden rounded',
+          innerStyle: 'background: #ffffff;'
+        },
+        { // 矩形白框
+          article: 'group relative p-3 transition hover:-translate-y-2',
+          articleStyle: 'background: var(--lumina-surface); border: 8px solid var(--lumina-surface); box-shadow: var(--lumina-shadow-2); border-radius: 4px;',
+          inner: 'aspect-[4/3] overflow-hidden rounded',
+          innerStyle: 'background: #ffffff;'
+        }
+      ];
+
+      var HEART_CLIP = 'polygon(50% 12%, 60% 3%, 74% 3%, 86% 12%, 92% 28%, 88% 46%, 50% 90%, 12% 46%, 8% 28%, 14% 12%, 26% 3%, 40% 3%)';
+
+      function buildFrame(frame, url, name) {
+        var article = document.createElement('article');
+        article.className = frame.article;
+        article.style.cssText = frame.articleStyle;
+
+        var inner;
+        if (frame.heart) {
+          var pad = document.createElement('div');
+          pad.className = 'p-2';
+          pad.style.background = 'var(--lumina-surface)';
+          pad.style.clipPath = 'polygon(50% 10%, 61% 0, 75% 0, 88% 10%, 95% 28%, 90% 48%, 50% 95%, 10% 48%, 5% 28%, 12% 10%, 25% 0, 39% 0)';
+          inner = document.createElement('div');
+          inner.className = 'aspect-square overflow-hidden';
+          inner.style.background = '#ffffff';
+          inner.style.clipPath = HEART_CLIP;
+          pad.appendChild(inner);
+          article.appendChild(pad);
+        } else {
+          inner = document.createElement('div');
+          inner.className = frame.inner;
+          inner.style.cssText = frame.innerStyle;
+          article.appendChild(inner);
+        }
+
+        var img = document.createElement('img');
+        img.src = url;
+        img.alt = name;
+        img.draggable = false;
+        img.className = 'w-full h-full block object-cover';
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', function () { openPreview(url, name); });
+        inner.appendChild(img);
+
+        /* 右上角删除按钮(独立 PNG 图标) */
+        var delBtn = document.createElement('button');
+        delBtn.type = 'button';
+        delBtn.title = 'Delete';
+        delBtn.setAttribute('aria-label', 'Delete');
+        delBtn.className = 'absolute z-10 w-[39px] h-[39px] p-0 bg-transparent border-0 rounded-full cursor-pointer hover:scale-110 transition';
+        delBtn.style.boxShadow = 'var(--lumina-shadow-2)';
+        delBtn.style.top = '6px';
+        delBtn.style.right = '6px';
+        var delIcon = document.createElement('img');
+        delIcon.src = 'assets/icon-delete.png';
+        delIcon.alt = '';
+        delIcon.draggable = false;
+        delIcon.className = 'w-full h-full block pointer-events-none';
+        delBtn.appendChild(delIcon);
+        delBtn.addEventListener('click', async function (e) {
+          e.stopPropagation();
+          if (!window.confirm('Delete this artwork?')) return;
+          var ok = false;
+          if (window.worksStore) ok = await window.worksStore.deleteImage(name);
+          if (ok) {
+            loadWorks();
+          } else {
+            window.alert('Delete failed. Please allow folder write permission and try again.');
+          }
+        });
+        article.appendChild(delBtn);
+
+        return article;
+      }
+
+      function renderWorks(files) {
+        clearGrid();
+        if (!files.length) {
+          showStatus('No artwork yet. Draw and save something first.', false);
+          return;
+        }
+
+        files.forEach(function (file, i) {
+          var url = URL.createObjectURL(file);
+          objectURLs.push(url);
+          grid.appendChild(buildFrame(FRAMES[i % FRAMES.length], url, file.name));
+        });
+        hideStatus();
+      }
+
+      async function loadWorks() {
+        if (!window.worksStore || !window.worksStore.supported) {
+          showStatus('Current browser cannot read the works folder. Please use Chrome or Edge.', false);
+          return;
+        }
+
+        var handle = await window.worksStore.getHandle(false, 'read');
+        if (!handle) {
+          showStatus('Allow access to the works folder to display saved artwork.', true);
+          return;
+        }
+
+        var files = await window.worksStore.listImages();
+        renderWorks(files);
+      }
+
+      loadBtn.addEventListener('click', async function () {
+        try {
+          statusText.textContent = 'Loading your works...';
+          loadBtn.classList.add('hidden');
+          var handle = await window.worksStore.connect();
+          if (!handle) {
+            showStatus('Folder access was not granted.', true);
+            return;
+          }
+          var files = await window.worksStore.listImages();
+          renderWorks(files);
+        } catch (err) {
+          if (err && err.name === 'AbortError') {
+            showStatus('Folder selection cancelled.', true);
+          } else {
+            console.error(err);
+            showStatus('Unable to read the works folder.', true);
+          }
+        }
+      });
+
+      loadWorks();
+    })();
+  </script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

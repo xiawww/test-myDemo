@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home · Lumina Stroke Gallery</title>
+    <style id="theme-vars">
+/* Lumina Stroke Gallery — Brand tokens for PC web UI */
+
+:root {
+  /* Core palette */
+  --lumina-bg: #FAF5FF;
+  --lumina-surface: #FFFFFF;
+  --lumina-surface-2: #F3E8FF;
+  --lumina-ink: #4A1D6A;
+  --lumina-ink-2: #7C3AED;
+  --lumina-ink-3: #A78BFA;
+  --lumina-line: #E9D5FF;
+  --lumina-brand: #A855F7;
+  --lumina-brand-ink: #FFFFFF;
+
+  /* Primary scale (single hue) */
+  --lumina-primary-50: #FAF5FF;
+  --lumina-primary-100: #F3E8FF;
+  --lumina-primary-200: #E9D5FF;
+  --lumina-primary-300: #D8B4FE;
+  --lumina-primary-400: #C084FC;
+  --lumina-primary-500: #A855F7;
+  --lumina-primary-600: #9333EA;
+  --lumina-primary-700: #7C3AED;
+  --lumina-primary-800: #6B21A8;
+  --lumina-primary-900: #4A1D6A;
+
+  /* Semantic aliases required by head contract */
+  --lumina-background: var(--lumina-bg);
+  --lumina-foreground: var(--lumina-ink);
+  --lumina-card: var(--lumina-surface);
+  --lumina-card-foreground: var(--lumina-ink);
+  --lumina-popover: var(--lumina-surface);
+  --lumina-popover-foreground: var(--lumina-ink);
+  --lumina-primary: var(--lumina-brand);
+  --lumina-primary-foreground: var(--lumina-brand-ink);
+  --lumina-muted: var(--lumina-surface-2);
+  --lumina-muted-foreground: var(--lumina-ink-2);
+  --lumina-border: var(--lumina-line);
+  --lumina-input: var(--lumina-line);
+  --lumina-ring: var(--lumina-primary-400);
+  --lumina-radius-small: 4px;
+  --lumina-radius-medium: 8px;
+  --lumina-radius-large: 16px;
+
+  /* Spacing */
+  --lumina-s-1: 4px;
+  --lumina-s-2: 8px;
+  --lumina-s-3: 12px;
+  --lumina-s-4: 16px;
+  --lumina-s-5: 24px;
+  --lumina-s-6: 32px;
+  --lumina-s-7: 48px;
+  --lumina-s-8: 80px;
+  --lumina-s-9: 120px;
+
+  /* Radius */
+  --lumina-r-xs: 2px;
+  --lumina-r-sm: 4px;
+  --lumina-r-md: 8px;
+  --lumina-r-lg: 16px;
+  --lumina-r-pill: 999px;
+
+  /* Shadows */
+  --lumina-shadow-1: 0 1px 2px rgba(74, 29, 106, 0.05), 0 1px 1px rgba(74, 29, 106, 0.03);
+  --lumina-shadow-2: 0 8px 24px -8px rgba(74, 29, 106, 0.18);
+  --lumina-shadow-3: 0 24px 60px -20px rgba(74, 29, 106, 0.30);
+
+  /* Typography */
+  --lumina-font-sans: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --lumina-font-display: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --lumina-font-mono: 'SF Mono', 'Fira Code', 'Noto Sans SC', monospace;
+}
+
+@layer base {
+  html, body {
+    font-family: var(--lumina-font-sans);
+    background-color: var(--lumina-bg);
+    color: var(--lumina-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* 禁止鼠标选中文本 */
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--lumina-font-display);
+    color: var(--lumina-ink);
+    font-weight: 600;
+    text-wrap: balance;
+    word-break: keep-all;
+  }
+
+  button, a {
+    transition: transform 160ms cubic-bezier(.2,.8,.2,1), color 160ms cubic-bezier(.2,.8,.2,1), background-color 160ms cubic-bezier(.2,.8,.2,1), box-shadow 160ms cubic-bezier(.2,.8,.2,1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--lumina-background);
+    --color-foreground: var(--lumina-foreground);
+    --color-card: var(--lumina-card);
+    --color-card-foreground: var(--lumina-card-foreground);
+    --color-popover: var(--lumina-popover);
+    --color-popover-foreground: var(--lumina-popover-foreground);
+    --color-primary: var(--lumina-primary);
+    --color-primary-foreground: var(--lumina-primary-foreground);
+    --color-muted: var(--lumina-muted);
+    --color-muted-foreground: var(--lumina-muted-foreground);
+    --color-border: var(--lumina-border);
+    --color-input: var(--lumina-input);
+    --color-ring: var(--lumina-ring);
+    --radius-sm: var(--lumina-radius-small);
+    --radius-md: var(--lumina-radius-medium);
+    --radius-lg: var(--lumina-radius-large);
+  }
+  @layer base {
+    body { background: var(--lumina-background); color: var(--lumina-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--lumina-background); }
+      .text-background { color: var(--lumina-background); }
+      .border-background { border-color: var(--lumina-background); }
+      .ring-background { --tw-ring-color: var(--lumina-background); }
+      .bg-foreground { background-color: var(--lumina-foreground); }
+      .text-foreground { color: var(--lumina-foreground); }
+      .border-foreground { border-color: var(--lumina-foreground); }
+      .ring-foreground { --tw-ring-color: var(--lumina-foreground); }
+      .bg-card { background-color: var(--lumina-card); }
+      .text-card { color: var(--lumina-card); }
+      .border-card { border-color: var(--lumina-card); }
+      .ring-card { --tw-ring-color: var(--lumina-card); }
+      .bg-card-foreground { background-color: var(--lumina-card-foreground); }
+      .text-card-foreground { color: var(--lumina-card-foreground); }
+      .border-card-foreground { border-color: var(--lumina-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--lumina-card-foreground); }
+      .bg-popover { background-color: var(--lumina-popover); }
+      .text-popover { color: var(--lumina-popover); }
+      .border-popover { border-color: var(--lumina-popover); }
+      .ring-popover { --tw-ring-color: var(--lumina-popover); }
+      .bg-popover-foreground { background-color: var(--lumina-popover-foreground); }
+      .text-popover-foreground { color: var(--lumina-popover-foreground); }
+      .border-popover-foreground { border-color: var(--lumina-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--lumina-popover-foreground); }
+      .bg-primary { background-color: var(--lumina-primary); }
+      .text-primary { color: var(--lumina-primary); }
+      .border-primary { border-color: var(--lumina-primary); }
+      .ring-primary { --tw-ring-color: var(--lumina-primary); }
+      .bg-primary-foreground { background-color: var(--lumina-primary-foreground); }
+      .text-primary-foreground { color: var(--lumina-primary-foreground); }
+      .border-primary-foreground { border-color: var(--lumina-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--lumina-primary-foreground); }
+      .bg-muted { background-color: var(--lumina-muted); }
+      .text-muted { color: var(--lumina-muted); }
+      .border-muted { border-color: var(--lumina-muted); }
+      .ring-muted { --tw-ring-color: var(--lumina-muted); }
+      .bg-muted-foreground { background-color: var(--lumina-muted-foreground); }
+      .text-muted-foreground { color: var(--lumina-muted-foreground); }
+      .border-muted-foreground { border-color: var(--lumina-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--lumina-muted-foreground); }
+      .bg-border { background-color: var(--lumina-border); }
+      .text-border { color: var(--lumina-border); }
+      .border-border { border-color: var(--lumina-border); }
+      .ring-border { --tw-ring-color: var(--lumina-border); }
+      .bg-input { background-color: var(--lumina-input); }
+      .text-input { color: var(--lumina-input); }
+      .border-input { border-color: var(--lumina-input); }
+      .ring-input { --tw-ring-color: var(--lumina-input); }
+      .bg-ring { background-color: var(--lumina-ring); }
+      .text-ring { color: var(--lumina-ring); }
+      .border-ring { border-color: var(--lumina-ring); }
+      .ring-ring { --tw-ring-color: var(--lumina-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body>
+  <main class="relative flex flex-col min-h-screen overflow-hidden" style="background: url('assets/marble-fluid-texture.jpg') center/100% 100% no-repeat;">
+    <div class="absolute inset-0 -z-10" style="background-image: radial-gradient(rgba(168,85,247,0.10) 1.5px, transparent 1.5px); background-size: 32px 32px;"></div>
+    <div class="absolute top-[-100px] right-[-60px] w-72 h-72 rounded-full blur-3xl -z-10" style="background: rgba(236,72,153,0.18);"></div>
+    <div class="absolute bottom-[-80px] left-[-40px] w-64 h-64 rounded-full blur-3xl -z-10" style="background: rgba(168,85,247,0.20);"></div>
+
+    <div class="max-w-7xl mx-auto px-8 py-12 flex-1 flex flex-col w-full">
+      <section class="text-center mb-12 shrink-0">
+        <h1 class="text-5xl md:text-6xl mb-3" style="color: var(--lumina-ink); font-weight: 600; letter-spacing: -0.02em;">Lumina Stroke Gallery</h1>
+        <p class="text-base md:text-lg max-w-2xl mx-auto mb-4" style="color: var(--lumina-ink-2);">Empty frames await your marks. There are no right answers here; every stroke is your own creation.</p>
+        <p class="text-sm inline-flex items-center gap-2 px-4 py-2 rounded-full" style="background: rgba(255,255,255,0.9); color: var(--lumina-primary-600); border: 1px solid var(--lumina-line); box-shadow: var(--lumina-shadow-1);">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+          <span>Choose one to trace</span>
+        </p>
+      </section>
+
+      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 flex-1 items-stretch">
+        <!-- Practice -->
+        <a href="practice.html" data-dom-id="card-practice" class="nav-card">
+          <div class="nav-label">PRACTICE<br>AREA</div>
+          <div class="nav-art">
+            <img class="nav-art-img" src="assets/icon-practice.png" alt="Practice cat" loading="lazy">
+          </div>
+        </a>
+
+        <!-- Game -->
+        <a href="game.html" data-dom-id="card-game" class="nav-card">
+          <div class="nav-label">GAME<br>AREA</div>
+          <div class="nav-art">
+            <img class="nav-art-img" src="assets/icon-game.png" alt="Game controller" loading="lazy">
+          </div>
+        </a>
+
+        <!-- Free Draw -->
+        <a href="free-draw.html" data-dom-id="card-free-draw" class="nav-card">
+          <div class="nav-label">FREE<br>CREATIVE AREA</div>
+          <div class="nav-art">
+            <img class="nav-art-img" src="assets/icon-free-draw.png" alt="Free draw palette" loading="lazy">
+          </div>
+        </a>
+
+        <!-- Gallery -->
+        <a href="gallery.html" data-dom-id="card-gallery" class="nav-card">
+          <div class="nav-label">EXHIBITION<br>AREA</div>
+          <div class="nav-art">
+            <img class="nav-art-img" src="assets/icon-gallery.png" alt="Gallery frame" loading="lazy">
+          </div>
+        </a>
+      </section>
+    </div>
+
+    <footer style="background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); border-top: 1px solid var(--lumina-line);">
+      <div class="max-w-7xl mx-auto px-8 h-14 flex items-center justify-center text-sm" style="color: var(--lumina-ink-2);">
+        <p>Lumina Stroke Gallery</p>
+      </div>
+    </footer>
+  </main>
+
+  <script>lucide.createIcons();</script>
+
+  <style>
+    .nav-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 24px 36px;
+      border-radius: 28px;
+      text-decoration: none;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: 0 18px 42px -14px rgba(74, 29, 106, 0.22);
+      transition: transform 200ms cubic-bezier(.2,.8,.2,1), box-shadow 200ms cubic-bezier(.2,.8,.2,1), background 200ms ease;
+      min-height: 380px;
+      overflow: hidden;
+    }
+    .nav-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 28px 60px -16px rgba(74, 29, 106, 0.28);
+      background: #FFFFFF;
+    }
+    .nav-label {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.35;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #7C3AED;
+      padding-bottom: 18px;
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .nav-label::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 4px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #A855F7, #F472B6);
+    }
+    .nav-art {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    .nav-art-img {
+      max-width: 120px;
+      max-height: 120px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 22px rgba(74, 29, 106, 0.12));
+      transition: transform 200ms cubic-bezier(.2,.8,.2,1);
+    }
+    .nav-card:hover .nav-art-img {
+      transform: scale(1.06);
+    }
+  </style>
+</body>
+</html>

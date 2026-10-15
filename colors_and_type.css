@@ -1,0 +1,101 @@
+/* Lumina Stroke Gallery — Brand tokens for PC web UI */
+
+:root {
+  /* Core palette */
+  --lumina-bg: #FAF5FF;
+  --lumina-surface: #FFFFFF;
+  --lumina-surface-2: #F3E8FF;
+  --lumina-ink: #4A1D6A;
+  --lumina-ink-2: #7C3AED;
+  --lumina-ink-3: #A78BFA;
+  --lumina-line: #E9D5FF;
+  --lumina-brand: #A855F7;
+  --lumina-brand-ink: #FFFFFF;
+
+  /* Primary scale (single hue) */
+  --lumina-primary-50: #FAF5FF;
+  --lumina-primary-100: #F3E8FF;
+  --lumina-primary-200: #E9D5FF;
+  --lumina-primary-300: #D8B4FE;
+  --lumina-primary-400: #C084FC;
+  --lumina-primary-500: #A855F7;
+  --lumina-primary-600: #9333EA;
+  --lumina-primary-700: #7C3AED;
+  --lumina-primary-800: #6B21A8;
+  --lumina-primary-900: #4A1D6A;
+
+  /* Semantic aliases required by head contract */
+  --lumina-background: var(--lumina-bg);
+  --lumina-foreground: var(--lumina-ink);
+  --lumina-card: var(--lumina-surface);
+  --lumina-card-foreground: var(--lumina-ink);
+  --lumina-popover: var(--lumina-surface);
+  --lumina-popover-foreground: var(--lumina-ink);
+  --lumina-primary: var(--lumina-brand);
+  --lumina-primary-foreground: var(--lumina-brand-ink);
+  --lumina-muted: var(--lumina-surface-2);
+  --lumina-muted-foreground: var(--lumina-ink-2);
+  --lumina-border: var(--lumina-line);
+  --lumina-input: var(--lumina-line);
+  --lumina-ring: var(--lumina-primary-400);
+  --lumina-radius-small: 4px;
+  --lumina-radius-medium: 8px;
+  --lumina-radius-large: 16px;
+
+  /* Spacing */
+  --lumina-s-1: 4px;
+  --lumina-s-2: 8px;
+  --lumina-s-3: 12px;
+  --lumina-s-4: 16px;
+  --lumina-s-5: 24px;
+  --lumina-s-6: 32px;
+  --lumina-s-7: 48px;
+  --lumina-s-8: 80px;
+  --lumina-s-9: 120px;
+
+  /* Radius */
+  --lumina-r-xs: 2px;
+  --lumina-r-sm: 4px;
+  --lumina-r-md: 8px;
+  --lumina-r-lg: 16px;
+  --lumina-r-pill: 999px;
+
+  /* Shadows */
+  --lumina-shadow-1: 0 1px 2px rgba(74, 29, 106, 0.05), 0 1px 1px rgba(74, 29, 106, 0.03);
+  --lumina-shadow-2: 0 8px 24px -8px rgba(74, 29, 106, 0.18);
+  --lumina-shadow-3: 0 24px 60px -20px rgba(74, 29, 106, 0.30);
+
+  /* Typography */
+  --lumina-font-sans: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --lumina-font-display: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --lumina-font-mono: 'SF Mono', 'Fira Code', 'Noto Sans SC', monospace;
+}
+
+@layer base {
+  html, body {
+    font-family: var(--lumina-font-sans);
+    background-color: var(--lumina-bg);
+    color: var(--lumina-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--lumina-font-display);
+    color: var(--lumina-ink);
+    font-weight: 600;
+    text-wrap: balance;
+    word-break: keep-all;
+  }
+
+  button, a {
+    transition: transform 160ms cubic-bezier(.2,.8,.2,1), color 160ms cubic-bezier(.2,.8,.2,1), background-color 160ms cubic-bezier(.2,.8,.2,1), box-shadow 160ms cubic-bezier(.2,.8,.2,1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
