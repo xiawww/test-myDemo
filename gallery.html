@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery · Lumina Stroke Gallery</title>
+    <title>Lumina Stroke Gallery</title>
     <style id="theme-vars">
 /* Lumina Stroke Gallery — Brand tokens for PC web UI */
 
@@ -222,7 +222,6 @@
 
       <div id="worksStatus" class="hidden flex-1 min-h-[320px] flex-col items-center justify-center gap-5 rounded-3xl" style="background: rgba(255,255,255,0.72); border: 1px solid var(--lumina-line); box-shadow: var(--lumina-shadow-1);">
         <p id="worksStatusText" class="text-base" style="color: var(--lumina-ink-2);">Loading your works...</p>
-        <button id="loadWorksBtn" type="button" class="hidden px-6 py-3 rounded-full text-white font-medium transition hover:-translate-y-0.5" style="background: var(--lumina-brand); box-shadow: 0 8px 20px -6px rgba(168,85,247,0.45);">Choose Works Folder</button>
       </div>
     </div>
   </main>
@@ -245,7 +244,6 @@
       var grid = document.getElementById('worksGrid');
       var statusBox = document.getElementById('worksStatus');
       var statusText = document.getElementById('worksStatusText');
-      var loadBtn = document.getElementById('loadWorksBtn');
       var objectURLs = [];
 
       /* ===== 大图预览弹窗 ===== */
@@ -280,18 +278,16 @@
         grid.innerHTML = '';
       }
 
-      function showStatus(message, showButton) {
+      function showStatus(message) {
         grid.classList.add('hidden');
         statusBox.classList.remove('hidden');
         statusBox.classList.add('flex');
         statusText.textContent = message;
-        loadBtn.classList.toggle('hidden', !showButton);
       }
 
       function hideStatus() {
         statusBox.classList.add('hidden');
         statusBox.classList.remove('flex');
-        loadBtn.classList.add('hidden');
         grid.classList.remove('hidden');
       }
 
@@ -398,7 +394,7 @@
           if (ok) {
             loadWorks();
           } else {
-            window.alert('Delete failed. Please allow folder write permission and try again.');
+            window.alert('Delete failed. Please try again.');
           }
         });
         article.appendChild(delBtn);
@@ -409,7 +405,7 @@
       function renderWorks(files) {
         clearGrid();
         if (!files.length) {
-          showStatus('No artwork yet. Draw and save something first.', false);
+          showStatus('No artwork yet. Draw and save something first.');
           return;
         }
 
@@ -423,13 +419,7 @@
 
       async function loadWorks() {
         if (!window.worksStore || !window.worksStore.supported) {
-          showStatus('Current browser cannot read the works folder. Please use Chrome or Edge.', false);
-          return;
-        }
-
-        var handle = await window.worksStore.getHandle(false, 'read');
-        if (!handle) {
-          showStatus('Allow access to the works folder to display saved artwork.', true);
+          showStatus('Current browser does not support local artwork storage.', false);
           return;
         }
 
@@ -437,28 +427,8 @@
         renderWorks(files);
       }
 
-      loadBtn.addEventListener('click', async function () {
-        try {
-          statusText.textContent = 'Loading your works...';
-          loadBtn.classList.add('hidden');
-          var handle = await window.worksStore.connect();
-          if (!handle) {
-            showStatus('Folder access was not granted.', true);
-            return;
-          }
-          var files = await window.worksStore.listImages();
-          renderWorks(files);
-        } catch (err) {
-          if (err && err.name === 'AbortError') {
-            showStatus('Folder selection cancelled.', true);
-          } else {
-            console.error(err);
-            showStatus('Unable to read the works folder.', true);
-          }
-        }
-      });
-
       loadWorks();
+      console.log('Gallery 页面加载完成');
     })();
   </script>
   <script>lucide.createIcons();</script>
