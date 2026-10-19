@@ -900,8 +900,10 @@
       // 接收 practice.html 跳转时携带的图片地址, 自动作为临摹参考图
       var urlParams = new URLSearchParams(location.search);
       var initialImg = urlParams.get('img');
-      // bg=1: 右侧纯色形状图案, 保存时需作为背景合成进画布
-      var paintRefBackground = urlParams.get('bg') === '1';
+      // 右侧纯色形状图案保存时需作为背景合成进画布:
+      // 兼容两种入口 —— 链接带 bg=1, 或图片本身是 shape-*.png 形状图
+      var paintRefBackground = urlParams.get('bg') === '1' ||
+        (!!initialImg && /(^|[\\/])shape-[^\\/]+\.(png|webp|jpg|jpeg|gif)$/i.test(initialImg));
       console.log('[init] 参考图:', initialImg, '| 保存时合成背景:', paintRefBackground);
       if (initialImg) loadRefURL(initialImg);
     })();
