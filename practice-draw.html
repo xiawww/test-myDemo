@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Draw · Lumina Stroke Gallery</title>
+  <title>Lumina Stroke Gallery</title>
   <style id="theme-vars">
     /* Lumina Stroke Gallery — Brand tokens for PC web UI */
 
@@ -833,6 +833,27 @@
         var octx = out.getContext('2d');
         octx.fillStyle = '#ffffff';
         octx.fillRect(0, 0, out.width, out.height);
+        // 从右侧形状图案进入(bg=1): 把形状图案作为背景合成进成品图。
+        // 保存时重新加载一次原图(与页面 img 状态解耦), 等待加载完成再绘制,
+        // 按屏幕上 object-fit: contain 的同样规则等比居中、100% 不透明度。
+        if (paintRefBackground) {
+          try {
+            var bgImg = new Image();
+            bgImg.src = refImg.getAttribute('src') || initialImg;
+            await new Promise(function (resolve, reject) {
+              if (bgImg.complete && bgImg.naturalWidth) return resolve();
+              bgImg.onload = resolve;
+              bgImg.onerror = reject;
+            });
+            var iw = bgImg.naturalWidth, ih = bgImg.naturalHeight;
+            var bgScale = Math.min(out.width / iw, out.height / ih);
+            var dw = iw * bgScale, dh = ih * bgScale;
+            octx.drawImage(bgImg, (out.width - dw) / 2, (out.height - dh) / 2, dw, dh);
+            console.log('[save] 形状背景已合成', bgImg.src, iw + 'x' + ih);
+          } catch (bgErr) {
+            console.error('[save] 形状背景加载失败, 已跳过背景', bgErr);
+          }
+        }
         octx.drawImage(canvas, 0, 0);
 
         var ts = new Date();
@@ -877,7 +898,11 @@
       updateBrushDot();
 
       // 接收 practice.html 跳转时携带的图片地址, 自动作为临摹参考图
-      var initialImg = new URLSearchParams(location.search).get('img');
+      var urlParams = new URLSearchParams(location.search);
+      var initialImg = urlParams.get('img');
+      // bg=1: 右侧纯色形状图案, 保存时需作为背景合成进画布
+      var paintRefBackground = urlParams.get('bg') === '1';
+      console.log('[init] 参考图:', initialImg, '| 保存时合成背景:', paintRefBackground);
       if (initialImg) loadRefURL(initialImg);
     })();
   </script>
